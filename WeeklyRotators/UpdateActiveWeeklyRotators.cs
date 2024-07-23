@@ -40,6 +40,21 @@ public class UpdateActiveWeeklyRotators{
         }
 
         List<string> activeWeeklyRotatorsList = new List<string>(rawWeeklyRotatorsDictionary.Keys);
+
+        // // //NODE.OVRD.AVALON// 87546222900
+        // // Starcrossed 87546333822
+
+        // if (activeWeeklyRotatorsList < 3) {
+        //     Log.Information("The Active Weekly Rotator List returned less than 3 milestones")
+        //     Log.Information("This most likely means a activity doesnt have a milestone and will need to be manually added to the table and this code will need to be updated with that information")
+        //     // BUILD out the needed json object for the activeweeklyrotators table 
+        //     // Then come here and figure out a way to determine which is the active mission
+
+        //     list.add(missing milestone)
+
+
+        // }
+
         // Convert dictionary to JSON string and log
         string dictionaryJson = JsonConvert.SerializeObject(rawWeeklyRotatorsDictionary, Formatting.Indented);
         Log.Information(dictionaryJson);
