@@ -279,10 +279,11 @@ const WeeklyRotators = () => {
         setClickedItem(null);
     };
     const renderItems = (dict) => {
+        const shouldAddClass = Object.keys(dict).length >= 2;
         return Object.entries(dict).map(([itemName, itemData]) => (
             <img 
                 key={itemName} 
-                className="img-fluid wr-img-icon " 
+                className={`img-fluid ${shouldAddClass ? 'wr-img-icon' : ''}`} 
                 src={"https://www.bungie.net" + itemData.icon} 
                 alt={itemName} 
                 onClick={() => handleClick(itemData)} 
@@ -377,6 +378,7 @@ const WeeklyRotators = () => {
                             <h5 className='fw-bold'>Weapons</h5>
                             {renderItems(exoticQuestWeaponDict)}
                         </div>
+                        {Object.keys(exoticQuestTitanArmorDict).length > 0 || Object.keys(exoticQuestHunterArmorDict).length || Object.keys(exoticQuestWarlockArmorDict).length> 0 && (
                         <div className='wr-img-column-container px-1'>
                             <h5 className='fw-bold'>Armor</h5>
                             <div className='Titan'>
@@ -389,6 +391,7 @@ const WeeklyRotators = () => {
                                 {renderItems(exoticQuestWarlockArmorDict)}
                             </div>
                         </div>
+                        )}
                         {Object.keys(exoticQuestCatalystDict).length > 0 && (
                         <div className='wr-img-column-container px-1'>
                             <h5 className='fw-bold'>Catalyst</h5>
