@@ -374,11 +374,12 @@ const WeeklyRotators = () => {
                     <h3 className='fw-bold'>{exoticQuestName}</h3>
                     <p>You get 3 guaranteed red border drops per week. <br></br>One for completing legend, one for master and one when the pinnacle reward is completed</p>
                     <div className={`info-container ${isSmallScreen ? 'flex-column' : 'd-inline-flex'}`}>
+                  
                         <div className='wr-img-column-container px-1'>
                             <h5 className='fw-bold'>Weapons</h5>
                             {renderItems(exoticQuestWeaponDict)}
                         </div>
-                        {Object.keys(exoticQuestTitanArmorDict).length > 0 || Object.keys(exoticQuestHunterArmorDict).length || Object.keys(exoticQuestWarlockArmorDict).length> 0 && (
+                        {(Object.keys(exoticQuestTitanArmorDict).length > 0 || Object.keys(exoticQuestHunterArmorDict).length > 0 || Object.keys(exoticQuestWarlockArmorDict).length > 0) && (
                         <div className='wr-img-column-container px-1'>
                             <h5 className='fw-bold'>Armor</h5>
                             <div className='Titan'>
