@@ -214,36 +214,6 @@ public class WeeklyRotatorsTable{
         string sqlConnectionString = $"Server={Server};Database={Database};TrustServerCertificate=True;Uid={UserId};Pwd={Password};";
         Log.Information(sqlConnectionString);
         string tableName = "WeeklyRotatorsTable";
-        /***********************************************KEEP THIS COMMENTED OUT***********************************************/
-        /***********************************************CURRENTLY DOES NOT WORK BECAUSE OF INCONSISTENT ENDPOINT***********************************************/
-        // Dictionary to store weekly rotator milestones
-        // Dictionary<string, PublicMilestonesResponse.Milestone> rawWeeklyRotatorsDictionary = new Dictionary<string, PublicMilestonesResponse.Milestone>();
-
-        // Loops through all milestones and checks for the 3 Weekly Rotators and adds them to a list
-        // if (PublicMilestonesObject.Response != null) {
-        //     foreach (KeyValuePair<string, PublicMilestonesResponse.Milestone> milestoneKVP in PublicMilestonesObject.Response){
-        //         if (milestoneKVP.Value.Activities != null) {
-        //             foreach (PublicMilestonesResponse.Activity activity in milestoneKVP.Value.Activities){
-        //                 if(activity.ChallengeObjectiveHashes != null){
-        //                     if(activity.ChallengeObjectiveHashes.Count > 0){ 
-        //                         // Check if the key exist already if it does do not add it. This will eliminate the Legend versions from the dict
-        //                         if (!rawWeeklyRotatorsDictionary.ContainsKey(milestoneKVP.Key)){
-        //                             // Create a new dictionary to hold the milestone
-        //                             rawWeeklyRotatorsDictionary.Add(milestoneKVP.Key, milestoneKVP.Value);
-        //                         }
-        //                     }
-        //                 }
-        //             }
-        //         }
-
-        //     }
-        // } else {
-        //     Log.Warning("PublicMilestonesObject.Response is null. Unable to iterate through milestones.");
-        //     throw new ApplicationException("PublicMilestonesObject.Response is null. Unable to iterate through milestones.");
-        // }
-
-        // Log.Information(JsonConvert.SerializeObject(rawWeeklyRotatorsDictionary));
-        /**********************************************************************************************/
         long? activityId = null;
         long? activityTypeId = null;
         string? activityName = null;
@@ -267,8 +237,7 @@ public class WeeklyRotatorsTable{
                 // Empty dictionary to add table information to
                 Dictionary<string, object> weeklyRotatorTableJson = new Dictionary<string, object>();
 
-                // Loops through found weekly rotators
-                //foreach(KeyValuePair<string, PublicMilestonesResponse.Milestone> weeklyRotatorKVP in rawWeeklyRotatorsDictionary){
+                // Loops through the list of passed in activities
                 foreach(long activityHash in weeklyRotatorTableHashes){
                     weapons.Clear();
                     hunterArmor.Clear();
@@ -277,40 +246,6 @@ public class WeeklyRotatorsTable{
                     cosmetics.Clear();
                     catalysts.Clear();
                     weeklyRotatorTableJson.Clear();
-                    /***********************************************KEEP THIS COMMENTED OUT***********************************************/
-                    /***********************************************CURRENTLY DOES NOT WORK BECAUSE OF INCONSISTENT ENDPOINT***********************************************/
-                    // var milestoneId = unchecked((int) weeklyRotatorKVP.Value.MilestoneHash);
-                    // Query to find weekly rotator milestone by Id
-                    // using (SqlCommand sqlCommand = new SqlCommand($"SELECT * FROM DestinyMilestoneDefinition Where Id = {milestoneId}", msSqlConnection)){
-                    //     using (SqlDataReader reader = sqlCommand.ExecuteReader()){
-                    //         while (reader.Read()){
-                    //             // Log the response using Serilog
-                    //             Log.Information("SQL Query Response: {@Response}", new{
-                    //                 LogId = reader["Id"],
-                    //                 LogJson = reader["json"].ToString(),
-                    //             });
-                    //             string? milestoneDefinitionJson = reader["json"].ToString();
-                    //             MilestoneDefinitionJson.Root? milestoneDefinitionRoot = null;
-                    //             if (milestoneDefinitionJson != null) {
-                    //                 milestoneDefinitionRoot = JsonConvert.DeserializeObject<MilestoneDefinitionJson.Root>(milestoneDefinitionJson);
-                    //             } else {
-                    //                 Log.Warning("milestoneDefinitionJson is null. Unable to deserialize.");
-                    //             }
-                    //             milestoneHash = milestoneDefinitionRoot?.hash;
-                    //             long? activityHash = null;
-                    //             if (milestoneDefinitionRoot != null && milestoneDefinitionRoot.activities != null && milestoneDefinitionRoot.activities.Length > 0) {
-                    //                 activityHash = milestoneDefinitionRoot?.activities[0].activityHash;
-                    //             }
-
-                    //             if(activityHash != null) {
-                    //                 activityId =  unchecked((int) activityHash);
-                    //             }
-                                
-                    
-                    //         }
-                    //     }
-                    // }
-                    /****************************************************************************************************************************************************************/
 
                     // Query to check if rotator already exist and sets a variable = to the has that was found
                     using (SqlCommand checkIfRowExistCommand = new SqlCommand($"SELECT * FROM {tableName} Where Hash = {activityHash}", msSqlConnection)){
@@ -321,11 +256,11 @@ public class WeeklyRotatorsTable{
                         }
                     }
 
-                    // // If rotator exist it skips this index of the loop
-                    // if(activityHash == hashInTable){
-                    //     Log.Information($"{activityHash} is already in table");
-                    //     continue;
-                    // }
+                    // If rotator exist it skips this index of the loop
+                    if(activityHash == hashInTable){
+                        Log.Information($"{activityHash} is already in table");
+                        continue;
+                    }
 
                     activityId =  unchecked((int) activityHash);
                     // Query to get Activity Definition using activityId
