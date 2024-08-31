@@ -1,0 +1,18 @@
+USE [gcprod]
+GO
+/****** Object:  StoredProcedure [dbo].[GetWeeklyRotators]    Script Date: 8/30/2024 8:00:09 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[GetWeeklyRotators]
+    @Rotator1 BIGINT,
+    @Rotator2 BIGINT,
+    @Rotator3 BIGINT
+AS
+BEGIN
+    SELECT *
+    FROM WeeklyRotatorsTable
+    WHERE Hash IN (@Rotator1, @Rotator2, @Rotator3);
+END;

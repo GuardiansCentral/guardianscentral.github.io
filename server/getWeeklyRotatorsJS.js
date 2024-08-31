@@ -33,13 +33,13 @@ async function getWeeklyRotatorsJS(){
         const rotatorListRequest = pool.request();
         const getAcvtiveWeeklyRotators = await rotatorListRequest.input('Name', sql.NVarChar, 'ActiveWeeklyRotators').execute('GetRotatorList');
         const rotatorListString = getAcvtiveWeeklyRotators.recordset[0].RotatorList;
-        const milestonesHashList = JSON.parse(rotatorListString).map(String);
+        const rotatorHashList = JSON.parse(rotatorListString).map(String);
 
         // Call GetWeeklyRotators stored procedure
         const weeklyRotatorsRequest = pool.request();
-        for (let i = 0; i < milestonesHashList.length; i++) {
-            weeklyRotatorsRequest.input(`Milestone${i + 1}`, sql.BigInt, milestonesHashList[i]);
-            console.log(milestonesHashList[i]);
+        for (let i = 0; i < rotatorHashList.length; i++) {
+            weeklyRotatorsRequest.input(`Rotator${i + 1}`, sql.BigInt, rotatorHashList[i]);
+            console.log(rotatorHashList[i]);
         }
 
         const result = await weeklyRotatorsRequest.execute('GetWeeklyRotators');
