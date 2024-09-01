@@ -10,40 +10,38 @@ public class UpdateActiveWeeklyRotators{
         string sqlConnectionString = $"Server={Server};Database={Database};TrustServerCertificate=True;Uid={UserId};Pwd={Password};";
         Log.Information(sqlConnectionString);
         string tableName = "ActiveWeeklyRotatorsTable";
-        // Dictionary to store weekly rotator milestones
-        Dictionary<string, PublicMilestonesResponse.Milestone> rawWeeklyRotatorsDictionary = new Dictionary<string, PublicMilestonesResponse.Milestone>();
-
-        // List of banned hashes
-        List<string> bannedHashes = new List<string> { "3690703860" };
-
-        // Loops through all milestones and checks for the 3 Weekly Rotators and adds them to a list
-        if (PublicMilestonesObject.Response != null) {
-            foreach (KeyValuePair<string, PublicMilestonesResponse.Milestone> milestoneKVP in PublicMilestonesObject.Response){
-                if (milestoneKVP.Value.Activities != null) {
-                    foreach (PublicMilestonesResponse.Activity activity in milestoneKVP.Value.Activities){
-                        if(activity.ChallengeObjectiveHashes != null){
-                            if(activity.ChallengeObjectiveHashes.Count > 0){ 
-                                // Check if the key exist already if it does do not add it. This will eliminate the Legend versions from the dict
-                                if (!rawWeeklyRotatorsDictionary.ContainsKey(milestoneKVP.Key) && !bannedHashes.Contains(milestoneKVP.Key)) {
-                                    // Create a new dictionary to hold the milestone
-                                    rawWeeklyRotatorsDictionary.Add(milestoneKVP.Key, milestoneKVP.Value);
-                                }
-                            }
-                        }
+ 
+        using (SqlConnection msSqlConnection = new SqlConnection(sqlConnectionString)){
+            try{
+                msSqlConnection.Open();
+                bool doesTableExist = TableExists(connection:msSqlConnection, tableName:tableName);
+                if(doesTableExist == false){
+                    Log.Information($"{tableName} not found");
+                    using (SqlCommand createTableCommand = new SqlCommand($"CREATE TABLE {tableName} (NAME VARCHAR(MAX) , RotatorList VARCHAR(MAX))", msSqlConnection)) {
+                        createTableCommand.ExecuteNonQuery();
                     }
                 }
-
+                bool doesNameExistsInColumn = NameExistsInColumn(connection:msSqlConnection, tableName:tableName, columnName:"NAME", nameToCheck:"ActiveWeeklyRotators");
+                if(doesNameExistsInColumn == false){
+                    string valueForNameColumn = "ActiveWeeklyRotators";
+                    List<long> defaultWeeklyRotatorList = new List<long>;
+                    defaultWeeklyRotatorList.Add(1441982566);
+                    defaultWeeklyRotatorList.Add(4078656646);
+                    defaultWeeklyRotatorList.Add(509188661);
+                    string defaultWeeklyRotatorListString = "[" + string.Join(",", defaultWeeklyRotatorList) + "]";
+                    Log.Information($"{valueForNameColumn} name in column was not found. Will create the row now and set it to the default rotators");
+                    using (SqlCommand addEmptyRowCommand = new SqlCommand($"INSERT INTO {tableName} (NAME, RotatorList) VALUES (@NAME, @RotatorList)",msSqlConnection)){
+                        addEmptyRowCommand.Parameters.AddWithValue("@NAME", valueForNameColumn);
+                        addEmptyRowCommand.Parameters.AddWithValue("@RotatorList", string.Join(",", defaultWeeklyRotatorListString));
+                        addEmptyRowCommand.ExecuteNonQuery();
+                    }
+                }
+            }catch(Exception ex){
+                Log.Error(ex.Message);
             }
-        } else {
-            Log.Warning("PublicMilestonesObject.Response is null. Unable to iterate through milestones.");
-            throw new ApplicationException("PublicMilestonesObject.Response is null. Unable to iterate through milestones.");
         }
 
-        List<string> activeWeeklyRotatorsList = new List<string>(rawWeeklyRotatorsDictionary.Keys);
-        // Convert dictionary to JSON string and log
-        string dictionaryJson = JsonConvert.SerializeObject(rawWeeklyRotatorsDictionary, Formatting.Indented);
-        Log.Information(dictionaryJson);
-        Log.Information(string.Join(", ", activeWeeklyRotatorsList));
+
         using (SqlConnection msSqlConnection = new SqlConnection(sqlConnectionString)){
             try{
                 msSqlConnection.Open();
