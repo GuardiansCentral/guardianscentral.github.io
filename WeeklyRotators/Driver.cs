@@ -20,7 +20,7 @@ class Program{
         }
 
         // Gets all the data from the TOML file
-        var configFile = Toml.ReadFile(tomlFilePath);
+        var configFile = await Task.Run(() => Toml.ReadFile(tomlFilePath));
 
         string LoggerPath = configFile.Get<string>("LoggerPath");
         Log.Logger = new LoggerConfiguration()
@@ -30,22 +30,17 @@ class Program{
             .CreateLogger();
 
         // Converts TOML File data to strings
-        string BungieRootPath = configFile.Get<string>("BungieRootPath");
-        string BungieApiRootPath = configFile.Get<string>("BungieAPIRootPath");
-        string GetPublicMilestoneEndpoint = configFile.Get<string>("GetPublicMilestoneEndpoint");
-        string GuardiansCentralApiKey = configFile.Get<string>("GuardiansCentralApiKey");
         string Server = configFile.Get<string>("Server");
         string Database = configFile.Get<string>("Database");
         string UserId = configFile.Get<string>("UserId");
         string Password = configFile.Get<string>("Password");
-
         List <long> weeklyRotatorTableHashes = new List<long>();
-        WeeklyRotatorsTable.BuildWeeklyRotatorsTable(PublicMilestonesObject, Server, Database, UserId, Password, weeklyRotatorTableHashes);
-        //UpdateActiveWeeklyRotators.UpdateTable(PublicMilestonesObject, Server, Database, UserId, Password);
-
-
-    
-
+        if (weeklyRotatorTableHashes != null && weeklyRotatorTableHashes.Any()){
+            //This will probably need to be moved in the future since we are manually passing in values for the list
+            WeeklyRotatorsTable.BuildWeeklyRotatorsTable(Server, Database, UserId, Password, weeklyRotatorTableHashes);
+        }
+        UpdateActiveWeeklyRotators.UpdateTable(Server, Database, UserId, Password);
+        
         Log.CloseAndFlush();  
     }
 }

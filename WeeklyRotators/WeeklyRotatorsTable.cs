@@ -209,7 +209,7 @@ public class WeeklyRotatorsMapping{
 
 // Main Class that builds Weekly Rotators Table
 public class WeeklyRotatorsTable{
-    public static void BuildWeeklyRotatorsTable(PublicMilestonesResponse.RootObject PublicMilestonesObject, string Server, string Database, string UserId, string Password, List<long> weeklyRotatorTableHashes){
+    public static void BuildWeeklyRotatorsTable(string Server, string Database, string UserId, string Password, List<long> weeklyRotatorTableHashes){
         // Create SQL Server connection
         string sqlConnectionString = $"Server={Server};Database={Database};TrustServerCertificate=True;Uid={UserId};Pwd={Password};";
         Log.Information(sqlConnectionString);
