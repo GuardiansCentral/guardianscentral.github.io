@@ -1,0 +1,16 @@
+USE [gcprod]
+GO
+/****** Object:  StoredProcedure [dbo].[GetRotatorList]    Script Date: 8/30/2024 7:59:59 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[GetRotatorList]
+    @Name NVARCHAR(100)
+AS
+BEGIN
+    SELECT RotatorList
+    FROM ActiveWeeklyRotatorsTable
+    WHERE NAME = @Name;
+END;
