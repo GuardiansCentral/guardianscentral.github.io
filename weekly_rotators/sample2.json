@@ -1,0 +1,421 @@
+{
+  "iconUrl": "/img/misc/missing_icon_d2.png",
+  "activityName": "Last Wish",
+  "pcgrImage": "/img/destiny_content/pgcr/raid_beanstalk.jpg",
+  "activityType": "Raid",
+  "titanArmor": [
+    {
+      "Helm of the Great Hunt": {
+        "name": "Helm of the Great Hunt",
+        "icon": "/common/destiny2_content/icons/f3cd900df3fdcf0eb24ec42a2f391c31.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/3546379828.jpg",
+        "typeAndTierDisplayName": "Legendary Helmet",
+        "tierTypeName": "Legendary"
+      }
+    },
+    {
+      "Gauntlets of the Great Hunt": {
+        "name": "Gauntlets of the Great Hunt",
+        "icon": "/common/destiny2_content/icons/966481b36642098933cb21711cc134d2.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/1952647501.jpg",
+        "typeAndTierDisplayName": "Legendary Gauntlets",
+        "tierTypeName": "Legendary"
+      }
+    },
+    {
+      "Plate of the Great Hunt": {
+        "name": "Plate of the Great Hunt",
+        "icon": "/common/destiny2_content/icons/884a53c9d1710e5accb185365675842d.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/1146451699.jpg",
+        "typeAndTierDisplayName": "Legendary Chest Armor",
+        "tierTypeName": "Legendary"
+      }
+    },
+    {
+      "Greaves of the Great Hunt": {
+        "name": "Greaves of the Great Hunt",
+        "icon": "/common/destiny2_content/icons/fa1dbd614568db36bc850b28ae18be11.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/2623446543.jpg",
+        "typeAndTierDisplayName": "Legendary Leg Armor",
+        "tierTypeName": "Legendary"
+      }
+    },
+    {
+      "Mark of the Great Hunt": {
+        "name": "Mark of the Great Hunt",
+        "icon": "/common/destiny2_content/icons/96f0dfb309fcae47e779f6d27586520a.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/3351877674.jpg",
+        "typeAndTierDisplayName": "Legendary Titan Mark",
+        "tierTypeName": "Legendary"
+      }
+    }
+  ],
+  "hunterArmor": [
+    {
+      "Mask of the Great Hunt": {
+        "name": "Mask of the Great Hunt",
+        "icon": "/common/destiny2_content/icons/3d7149a61cd354d14f8bf6d2133c01b4.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/3423279826.jpg",
+        "typeAndTierDisplayName": "Legendary Helmet",
+        "tierTypeName": "Legendary"
+      }
+    },
+    {
+      "Grips of the Great Hunt": {
+        "name": "Grips of the Great Hunt",
+        "icon": "/common/destiny2_content/icons/41a07585959355eab585d13df5583402.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/3889633083.jpg",
+        "typeAndTierDisplayName": "Legendary Gauntlets",
+        "tierTypeName": "Legendary"
+      }
+    },
+    {
+      "Vest of the Great Hunt": {
+        "name": "Vest of the Great Hunt",
+        "icon": "/common/destiny2_content/icons/937dfec4a744281d46946b0ccd58fb27.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/2180477077.jpg",
+        "typeAndTierDisplayName": "Legendary Chest Armor",
+        "tierTypeName": "Legendary"
+      }
+    },
+    {
+      "Strides of the Great Hunt": {
+        "name": "Strides of the Great Hunt",
+        "icon": "/common/destiny2_content/icons/456e19a43cd50d1cc137b44ba5485e7e.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/2298096557.jpg",
+        "typeAndTierDisplayName": "Legendary Leg Armor",
+        "tierTypeName": "Legendary"
+      }
+    },
+    {
+      "Cloak of the Great Hunt": {
+        "name": "Cloak of the Great Hunt",
+        "icon": "/common/destiny2_content/icons/03aed4195f29dbfa3024b992af09f2ac.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/877968616.jpg",
+        "typeAndTierDisplayName": "Legendary Hunter Cloak",
+        "tierTypeName": "Legendary"
+      }
+    }
+  ],
+  "warlockArmor": [
+    {
+      "Robes of the Great Hunt": {
+        "name": "Robes of the Great Hunt",
+        "icon": "/common/destiny2_content/icons/fb10acf6220b725be2444aba354895e0.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/4241329310.jpg",
+        "typeAndTierDisplayName": "Legendary Chest Armor",
+        "tierTypeName": "Legendary"
+      }
+    },
+    {
+      "Boots of the Great Hunt": {
+        "name": "Boots of the Great Hunt",
+        "icon": "/common/destiny2_content/icons/58b6b1dcdb64322e0d1761c6981bbf55.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/1890196228.jpg",
+        "typeAndTierDisplayName": "Legendary Leg Armor",
+        "tierTypeName": "Legendary"
+      }
+    },
+    {
+      "Gloves of the Great Hunt": {
+        "name": "Gloves of the Great Hunt",
+        "icon": "/common/destiny2_content/icons/9a6c1e477c13bebc658b2e77f84ddac0.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/2850984298.jpg",
+        "typeAndTierDisplayName": "Legendary Gauntlets",
+        "tierTypeName": "Legendary"
+      }
+    },
+    {
+      "Hood of the Great Hunt": {
+        "name": "Hood of the Great Hunt",
+        "icon": "/common/destiny2_content/icons/d67fcc57ea9130643f2020598fc2df85.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/1350126011.jpg",
+        "typeAndTierDisplayName": "Legendary Helmet",
+        "tierTypeName": "Legendary"
+      }
+    },
+    {
+      "Bond of the Great Hunt": {
+        "name": "Bond of the Great Hunt",
+        "icon": "/common/destiny2_content/icons/42a98e2899a0de554316233b2547c15e.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/3570956455.jpg",
+        "typeAndTierDisplayName": "Legendary Warlock Bond",
+        "tierTypeName": "Legendary"
+      }
+    }
+  ],
+  "weapons": [
+    {
+      "One Thousand Voices": {
+        "name": "One Thousand Voices",
+        "icon": "/common/destiny2_content/icons/51c53df606cca474dce3cadbf7d5ce28.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/2069224589.jpg",
+        "typeAndTierDisplayName": "Exotic Fusion Rifle",
+        "tierTypeName": "Exotic",
+        "damageTypeName": "Solar",
+        "damageTypeIcon": "/common/destiny2_content/icons/DestinyDamageTypeDefinition_2a1773e10968f2d088b97c22b22bba9e.png",
+        "isCraftable": "false",
+        "rpmStat": "",
+        "frameName": "Ahamkara's Eye",
+        "frameDescription": "Charging this weapon unleashes a giant continuous beam of death.",
+        "frameIcon": "/common/destiny2_content/icons/50acdede241ae67df84dd0a4e424ffe6.png"
+      }
+    },
+    {
+      "Transfiguration": {
+        "name": "Transfiguration",
+        "icon": "/common/destiny2_content/icons/4975d25cd6a8ce48ea04f346ee44b1bf.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/3799980700.jpg",
+        "typeAndTierDisplayName": "Legendary Scout Rifle",
+        "tierTypeName": "Legendary",
+        "damageTypeName": "Kinetic",
+        "damageTypeIcon": "/common/destiny2_content/icons/DestinyDamageTypeDefinition_3385a924fd3ccb92c343ade19f19a370.png",
+        "isCraftable": "false",
+        "rpmStat": "150",
+        "frameName": "High-Impact Frame",
+        "frameDescription": "Slow firing and high damage. This weapon is more accurate when stationary, moving slowly, and aiming down sights.",
+        "frameIcon": "/common/destiny2_content/icons/34573143849cf910d2381554bb57a10d.png"
+      }
+    },
+    {
+      "The Supremacy": {
+        "name": "The Supremacy",
+        "icon": "/common/destiny2_content/icons/57e762b0f41575efde3deaa79496f628.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/686951703.jpg",
+        "typeAndTierDisplayName": "Legendary Sniper Rifle",
+        "tierTypeName": "Legendary",
+        "damageTypeName": "Kinetic",
+        "damageTypeIcon": "/common/destiny2_content/icons/DestinyDamageTypeDefinition_3385a924fd3ccb92c343ade19f19a370.png",
+        "isCraftable": "false",
+        "rpmStat": "140",
+        "frameName": "Rapid-Fire Frame",
+        "frameDescription": "Deeper ammo reserves. Slightly faster reload when magazine is empty.",
+        "frameIcon": "/common/destiny2_content/icons/801d62d1f9783bee81d5700c54c24fda.png"
+      }
+    },
+    {
+      "Techeun Force": {
+        "name": "Techeun Force",
+        "icon": "/common/destiny2_content/icons/3ddbd72bdfefd1475d069c562ef80747.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/4094657108.jpg",
+        "typeAndTierDisplayName": "Legendary Fusion Rifle",
+        "tierTypeName": "Legendary",
+        "damageTypeName": "Arc",
+        "damageTypeIcon": "/common/destiny2_content/icons/DestinyDamageTypeDefinition_092d066688b879c807c3b460afdd61e6.png",
+        "isCraftable": "false",
+        "rpmStat": "",
+        "frameName": "Adaptive Frame",
+        "frameDescription": "A well-rounded grip, reliable and sturdy.",
+        "frameIcon": "/common/destiny2_content/icons/967fb4abc6ab98f74639d6c08e5f56ee.png"
+      }
+    },
+    {
+      "Chattering Bone": {
+        "name": "Chattering Bone",
+        "icon": "/common/destiny2_content/icons/886c1372ece5e30e6aee0fdfebf65bed.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/568515759.jpg",
+        "typeAndTierDisplayName": "Legendary Pulse Rifle",
+        "tierTypeName": "Legendary",
+        "damageTypeName": "Kinetic",
+        "damageTypeIcon": "/common/destiny2_content/icons/DestinyDamageTypeDefinition_3385a924fd3ccb92c343ade19f19a370.png",
+        "isCraftable": "false",
+        "rpmStat": "450",
+        "frameName": "Lightweight Frame",
+        "frameDescription": "Superb handling. Move faster with this weapon equipped.",
+        "frameIcon": "/common/destiny2_content/icons/6db8cd21c2b3e6fffeb6f111d6c70dd2.png"
+      }
+    },
+    {
+      "Age-Old Bond": {
+        "name": "Age-Old Bond",
+        "icon": "/common/destiny2_content/icons/bbcfd3be25a188e62ebc82258ec1009e.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/601592879.jpg",
+        "typeAndTierDisplayName": "Legendary Auto Rifle",
+        "tierTypeName": "Legendary",
+        "damageTypeName": "Void",
+        "damageTypeIcon": "/common/destiny2_content/icons/DestinyDamageTypeDefinition_ceb2f6197dccf3958bb31cc783eb97a0.png",
+        "isCraftable": "false",
+        "rpmStat": "360",
+        "frameName": "High-Impact Frame",
+        "frameDescription": "Slow firing and high damage. This weapon is more accurate when stationary, moving slowly, and aiming down sights.",
+        "frameIcon": "/common/destiny2_content/icons/34573143849cf910d2381554bb57a10d.png"
+      }
+    },
+    {
+      "Tyranny of Heaven": {
+        "name": "Tyranny of Heaven",
+        "icon": "/common/destiny2_content/icons/b4d39e31c777026b40e6acf2f7c6f720.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/2721249463.jpg",
+        "typeAndTierDisplayName": "Legendary Combat Bow",
+        "tierTypeName": "Legendary",
+        "damageTypeName": "Solar",
+        "damageTypeIcon": "/common/destiny2_content/icons/DestinyDamageTypeDefinition_2a1773e10968f2d088b97c22b22bba9e.png",
+        "isCraftable": "false",
+        "rpmStat": "",
+        "frameName": "Lightweight Frame",
+        "frameDescription": "Recurve Bow. Draw quickly and move faster while this weapon is equipped. \n[Reload]  : Use while drawn to cancel the shot.",
+        "frameIcon": "/common/destiny2_content/icons/b57de72ef16609f38557f1739e43b9c7.png"
+      }
+    },
+    {
+      "Nation of Beasts": {
+        "name": "Nation of Beasts",
+        "icon": "/common/destiny2_content/icons/02c39ef35d21b77989e1a4cd18e1d076.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/654370424.jpg",
+        "typeAndTierDisplayName": "Legendary Hand Cannon",
+        "tierTypeName": "Legendary",
+        "damageTypeName": "Arc",
+        "damageTypeIcon": "/common/destiny2_content/icons/DestinyDamageTypeDefinition_092d066688b879c807c3b460afdd61e6.png",
+        "isCraftable": "false",
+        "rpmStat": "140",
+        "frameName": "Adaptive Frame",
+        "frameDescription": "A well-rounded grip, reliable and sturdy.",
+        "frameIcon": "/common/destiny2_content/icons/967fb4abc6ab98f74639d6c08e5f56ee.png"
+      }
+    },
+    {
+      "Apex Predator": {
+        "name": "Apex Predator",
+        "icon": "/common/destiny2_content/icons/74e3e47ee5478055a662bd4083774119.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/2545083870.jpg",
+        "typeAndTierDisplayName": "Legendary Rocket Launcher",
+        "tierTypeName": "Legendary",
+        "damageTypeName": "Solar",
+        "damageTypeIcon": "/common/destiny2_content/icons/DestinyDamageTypeDefinition_2a1773e10968f2d088b97c22b22bba9e.png",
+        "isCraftable": "false",
+        "rpmStat": "20",
+        "frameName": "Adaptive Frame",
+        "frameDescription": "A well-rounded grip, reliable and sturdy.",
+        "frameIcon": "/common/destiny2_content/icons/967fb4abc6ab98f74639d6c08e5f56ee.png"
+      }
+    }
+  ],
+  "cosmetics": [
+    {
+      "Ermine TAC-717": {
+        "name": "Ermine TAC-717",
+        "icon": "/common/destiny2_content/icons/29448521d1d41ed4bc5ab93fc89e6611.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/2269373482.jpg",
+        "secondaryIcon": "",
+        "secondarySpecial": "",
+        "typeAndTierDisplayName": "Legendary Ship",
+        "tierTypeName": "Legendary"
+      }
+    },
+    {
+      "Wish-Maker Shell": {
+        "name": "Wish-Maker Shell",
+        "icon": "/common/destiny2_content/icons/becb8ad59793dd7f13071653c382012b.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/3862768196.jpg",
+        "secondaryIcon": "",
+        "secondarySpecial": "",
+        "typeAndTierDisplayName": "Legendary Ghost Shell",
+        "tierTypeName": "Legendary"
+      }
+    },
+    {
+      "Wish No More": {
+        "name": "Wish No More",
+        "icon": "/common/destiny2_content/icons/bd3acbaa5da9cb8a6d8ea3d4a6ff9aaf.jpg",
+        "screenshot": "",
+        "secondaryIcon": "/common/destiny2_content/icons/2660c7e16c0824a9e2ab167cede1fcab.jpg",
+        "secondarySpecial": "/common/destiny2_content/icons/c6c6e3ca270e29d4d443ba9d81d44102.jpg",
+        "typeAndTierDisplayName": "Legendary Emblem",
+        "tierTypeName": "Legendary"
+      }
+    },
+    {
+      "Apprentice Guide": {
+        "name": "Apprentice Guide",
+        "icon": "/common/destiny2_content/icons/27c8f3fbace3787383bff58838a2f80f.jpg",
+        "screenshot": "",
+        "secondaryIcon": "/common/destiny2_content/icons/87d56e89301584beadcca090141b1555.jpg",
+        "secondarySpecial": "/common/destiny2_content/icons/0b07dc8a43f1666b89e78faeca9a009e.jpg",
+        "typeAndTierDisplayName": "Legendary Emblem",
+        "tierTypeName": "Legendary"
+      }
+    },
+    {
+      "Journeyman Guide": {
+        "name": "Journeyman Guide",
+        "icon": "/common/destiny2_content/icons/bfc69f62a448947a6079ddba308585ef.jpg",
+        "screenshot": "",
+        "secondaryIcon": "/common/destiny2_content/icons/4047c94ec3fd74a78e12b9d0ba767044.jpg",
+        "secondarySpecial": "/common/destiny2_content/icons/0b07dc8a43f1666b89e78faeca9a009e.jpg",
+        "typeAndTierDisplayName": "Legendary Emblem",
+        "tierTypeName": "Legendary"
+      }
+    },
+    {
+      "Castle in the Clouds": {
+        "name": "Castle in the Clouds",
+        "icon": "/common/destiny2_content/icons/ef018a5137e05b7fb3535777698d71f2.jpg",
+        "screenshot": "",
+        "secondaryIcon": "/common/destiny2_content/icons/ff2155598f2b5984aba551b5198c4175.jpg",
+        "secondarySpecial": "/common/destiny2_content/icons/c6c6e3ca270e29d4d443ba9d81d44102.jpg",
+        "typeAndTierDisplayName": "Legendary Emblem",
+        "tierTypeName": "Legendary"
+      }
+    },
+    {
+      "The Winding Tower": {
+        "name": "The Winding Tower",
+        "icon": "/common/destiny2_content/icons/85f910c136124bac81969f5afc84164f.jpg",
+        "screenshot": "",
+        "secondaryIcon": "/common/destiny2_content/icons/4292bce53b179a3a8ac5f6a61d9d5c1f.jpg",
+        "secondarySpecial": "/common/destiny2_content/icons/c6c6e3ca270e29d4d443ba9d81d44102.jpg",
+        "typeAndTierDisplayName": "Legendary Emblem",
+        "tierTypeName": "Legendary"
+      }
+    },
+    {
+      "Cleansing Knife": {
+        "name": "Cleansing Knife",
+        "icon": "/common/destiny2_content/icons/3681c6676cae1edcafc61cb330ca04b4.jpg",
+        "screenshot": "/common/destiny2_content/screenshots/2081719592.jpg",
+        "secondaryIcon": "",
+        "secondarySpecial": "",
+        "typeAndTierDisplayName": "Legendary Vehicle",
+        "tierTypeName": "Legendary"
+      }
+    }
+  ],
+  "catalysts": [
+    {
+      "Taken Repurposing": {
+        "name": "Taken Repurposing",
+        "icon": "/common/destiny2_content/icons/bd41287ae54f807efeea416c84f9e25c.png",
+        "description": "This mod's perks are only active in the \"Last Wish\" raid.",
+        "typeAndTierDisplayName": "Common Last Wish Raid Mod",
+        "tierTypeName": "Common"
+      }
+    },
+    {
+      "Taken Invigoration": {
+        "name": "Taken Invigoration",
+        "icon": "/common/destiny2_content/icons/29335c04ad13aad7f8199a21895b8399.png",
+        "description": "This mod's perks are only active in the \"Last Wish\" raid.",
+        "typeAndTierDisplayName": "Common Last Wish Raid Mod",
+        "tierTypeName": "Common"
+      }
+    },
+    {
+      "Taken Armaments": {
+        "name": "Taken Armaments",
+        "icon": "/common/destiny2_content/icons/ec094fd2e1505254060f784f957a3eff.png",
+        "description": "This mod's perks are only active in the \"Last Wish\" raid.",
+        "typeAndTierDisplayName": "Common Last Wish Raid Mod",
+        "tierTypeName": "Common"
+      }
+    },
+    {
+      "Taken Barrier": {
+        "name": "Taken Barrier",
+        "icon": "/common/destiny2_content/icons/2573db4d1ae803beef9b0cd7caeba641.png",
+        "description": "This mod's perks are only active in the \"Last Wish\" raid.",
+        "typeAndTierDisplayName": "Common Last Wish Raid Mod",
+        "tierTypeName": "Common"
+      }
+    }
+  ]
+}

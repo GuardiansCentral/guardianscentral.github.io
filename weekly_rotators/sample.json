@@ -1,0 +1,28 @@
+{
+  "activityName": "Last Wish",
+  "iconUrl": "/img/misc/missing_icon_d2.png",
+  "pgcrImage": "/img/destiny_content/pgcr/raid_beanstalk.jpg",
+  "activityType": "Raid",
+  "titanArmor": [
+    "Greaves of the Great Hunt": {
+      "icon": "/common/destiny2_content/icons/fa1dbd614568db36bc850b28ae18be11.jpg",
+      "screenshot": "/common/destiny2_content/screenshots/2623446543.jpg",
+      "typeAndTierDisplayName": "Legendary Leg Armor",
+      "tierTypeName": "Legendary"
+    },
+    "Helm of the Great Hunt": {
+      "icon": "/common/destiny2_content/icons/f3cd900df3fdcf0eb24ec42a2f391c31.jpg",
+      "screenshot": "/common/destiny2_content/screenshots/3546379828.jpg",
+      "typeAndTierDisplayName": "Legendary Helmet",
+      "tierTypeName": "Legendary"
+    }
+  ],
+  "hunterArmor": {
+    "Mask of the Great Hunt": {
+      "icon": "/common/destiny2_content/icons/3d7149a61cd354d14f8bf6d2133c01b4.jpg",
+      "screenshot": "/common/destiny2_content/screenshots/3423279826.jpg",
+      "typeAndTierDisplayName": "Legendary Helmet",
+      "tierTypeName": "Legendary"
+    }
+  }
+}
