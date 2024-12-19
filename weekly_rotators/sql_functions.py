@@ -78,3 +78,8 @@ def build_active_weekly_rotator_table(config):
             execute_query(query=populate_active_weekly_rotator_table_query, config=config, params=None)
     except Exception as e:
         print(f"Error while creating the table: {e}")
+
+def does_item_exists_in_column(config, table_name, column_name, name_to_check):
+    query = f"SELECT 1 FROM {table_name} WHERE {column_name} = ?"
+    fetch_one(query, config, params=name_to_check)
+    return fetch_one(query, config, params=name_to_check) is not None
