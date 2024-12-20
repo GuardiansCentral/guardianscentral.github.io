@@ -16,7 +16,7 @@ def update_active_weekly_rotators(config,logger):
     current_active_weekly_rotators_string = current_active_weekly_rotators_row[0]
     rotators_string_list = current_active_weekly_rotators_string.strip('[]').split(',')
     current_active_weekly_rotators_list = [int(x.strip()) for x in rotators_string_list]
-    print(current_active_weekly_rotators_list)
+    logger.info(f"This is the current active weekly rotators {current_active_weekly_rotators_list}")
 
     if not current_active_weekly_rotators_list:
         logger.info("No active weekly rotators found")
@@ -59,7 +59,18 @@ def update_active_weekly_rotators(config,logger):
                     dungeon_two_found = True
                     new_activity_sequence = 2
             else:
-                new_activity_sequence = sequence + 2
+                if raid_one_found == False and raid_two_found == False and rotator_type == 'Raid':
+                    raid_one_found = True
+                    new_activity_sequence = sequence + 2
+                elif raid_two_found == False and raid_one_found == True and rotator_type == 'Raid':
+                    raid_two_found = True
+                    new_activity_sequence = sequence + 2
+                elif dungeon_one_found == False and dungeon_two_found == False and rotator_type == 'Dungeon':
+                    dungeon_one_found = True
+                    new_activity_sequence = sequence + 2
+                elif dungeon_two_found == False and dungeon_one_found == True and rotator_type == 'Dungeon':
+                    dungeon_two_found = True
+                    new_activity_sequence = sequence + 2
         elif rotator_type == 'Exotic Mission':
             if sequence >= max_sequence:
                 exotic_one_found = True
@@ -72,11 +83,11 @@ def update_active_weekly_rotators(config,logger):
         new_activity_hash = new_activity_row[0]
 
         new_active_weekly_rotators_list.append(new_activity_hash)
-    logger.info(str(new_active_weekly_rotators_list))
+    logger.info(f"This is the current active weekly rotators {str(new_active_weekly_rotators_list)}")
 
     if raid_one_found == True and raid_two_found == True and dungeon_one_found == True and dungeon_two_found == True and exotic_one_found == True:
         try:
-            execute_query(query=f"UPDATE ActiveWeeklyRotatorsTable WHERE NAME = ActiveWeeklyRotators SET RotatorList = {new_active_weekly_rotators_list}", config=config, params=None)
+            execute_query(query=f"UPDATE ActiveWeeklyRotatorsTable SET RotatorList = '{new_active_weekly_rotators_list}' WHERE NAME = 'ActiveWeeklyRotators'", config=config, params=None)
             logger.info("Successfully updated active weekly rotators list")
         except Exception as e:
             logger.error("Failed to update active weekly rotators list")

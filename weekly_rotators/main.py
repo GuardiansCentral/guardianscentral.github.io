@@ -23,8 +23,14 @@ logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
 
-# weekly_rotators_hash_list =['2122313384']
-# add_weekly_rotators(weekly_rotator_hash_list=weekly_rotators_hash_list, config=config)
+weekly_rotators_hash_list = [2122313384, 1042180643, 910380154, 3881495763,
+                             1441982566, 1374392663, 2381413764, 107319834,
+                             2823159265, 2032534090, 1077850348, 4078656646,
+                             313828469, 2668737148, 1221538367, 509188661,
+                             196691221, 3883295757, 2582501063, 1262462921
+                             ]
+
+add_weekly_rotators(weekly_rotator_hash_list=weekly_rotators_hash_list, config=config, logger=logger)
 update_active_weekly_rotators(config=config, logger=logger)
 # update_weekly_rotators_data
 """

@@ -46,12 +46,13 @@ def add_weekly_rotators(weekly_rotator_hash_list, config, logger):
                 inventory_item_id_list.append(convert_hash_to_id(inventory_item_hash))
         else:
             """Populates inventory item ids list if the activity name does not exist in the weekly rotators mapping"""
-            destiny_collectible_definition_rows = fetch_all(query=f"SELECT * FROM DestinyCollectibleDefinition WHERE Json LIKE '%{weekly_rotator_dict['activityName']}%'", config=config)
+            activity_name = weekly_rotator_dict['activityName'].replace("'", "''")
+            destiny_collectible_definition_rows = fetch_all(query=f"SELECT * FROM DestinyCollectibleDefinition WHERE Json LIKE '%{activity_name}%'", config=config)
             for destiny_collectible_definition_row in destiny_collectible_definition_rows:
                 destiny_collectible_definition_dict = json.loads(destiny_collectible_definition_row[1])
                 inventory_item_id_list.append(convert_hash_to_id(destiny_collectible_definition_dict['itemHash']))
 
-        print(weekly_rotator_dict)
+        logger.info(weekly_rotator_dict)
         # Builds List of item dictionaries to append to the Weekly Rotator Dict
         if len(inventory_item_id_list) > 0:
             # Initialize lists for items
@@ -62,8 +63,11 @@ def add_weekly_rotators(weekly_rotator_hash_list, config, logger):
             cosmetics = {}
             catalysts = {}
             for item_id in inventory_item_id_list:
-                destiny_inventory_item_definition_row = fetch_one(query=f"SELECT * FROM DestinyInventoryItemDefinition WHERE Id = {item_id}", config=config)
-                destiny_inventory_item_definition_dict = json.loads(destiny_inventory_item_definition_row[1])
+                try:
+                    destiny_inventory_item_definition_row = fetch_one(query=f"SELECT * FROM DestinyInventoryItemDefinition WHERE Id = {item_id}", config=config)
+                    destiny_inventory_item_definition_dict = json.loads(destiny_inventory_item_definition_row[1])
+                except Exception as e:
+                    logger.error(f"Failed to fetch inventory item id {item_id}: {e}")
 
                 inventory_item_name = destiny_inventory_item_definition_dict.get('displayProperties', {}).get('name', "")
                 inventory_item_icon = destiny_inventory_item_definition_dict.get('displayProperties', {}).get('icon', "")
@@ -123,7 +127,7 @@ def add_weekly_rotators(weekly_rotator_hash_list, config, logger):
                                 socket_type_id = convert_hash_to_id(socket_entry.get('singleInitialItemHash'))
                                 inventory_item_intrinsic_trait_list.append(socket_type_id)
                 else:
-                    print(f'No socket entries found for {inventory_item_name}')
+                    logger.info(f'No socket entries found for {inventory_item_name}')
 
                 inventory_item_frame_name = None
                 inventory_item_frame_description = None
@@ -136,7 +140,7 @@ def add_weekly_rotators(weekly_rotator_hash_list, config, logger):
                     inventory_item_frame_description = destiny_inventory_item_definition_intrinsic_trait_dict.get('displayProperties').get('description', '')
                     inventory_item_frame_icon = destiny_inventory_item_definition_intrinsic_trait_dict.get('displayProperties').get('icon', '')
                 else:
-                    print('Item does not need frame details')
+                    logger.info('Item does not need frame details')
 
                 if inventory_item_type in ["TitanArmor", "HunterArmor", "WarlockArmor"]:
                     inner_dictionary = {
@@ -188,7 +192,7 @@ def add_weekly_rotators(weekly_rotator_hash_list, config, logger):
                     # Append flattened catalyst data
                     catalysts.update({inventory_item_name: inner_dictionary})
                 else:
-                    print(
+                    logger.info(
                         'Inventory item type not recognized therefore inventory items will not be added to this entry')
 
                 weekly_rotator_dict["titanArmor"] = titan_armor
@@ -199,12 +203,16 @@ def add_weekly_rotators(weekly_rotator_hash_list, config, logger):
                 weekly_rotator_dict["weapons"] = weapons
         else:
             logger.info('Inventory item list is empty')
-        logger.info(weekly_rotator_dict)
+        logger.info(f"This is the weekly rotator dictionary {weekly_rotator_dict}")
 
         json_string = json.dumps(weekly_rotator_dict)
 
         insert_query = "INSERT INTO WeeklyRotatorsTable (Hash, Json) VALUES (?, ?)"
-        execute_query(query=insert_query, params=(activity_hash, json_string), config=config)
+        try:
+            execute_query(query=insert_query, params=(activity_hash, json_string), config=config)
+            logger.info(f"{activity_hash} was successfully inserted")
+        except Exception as e:
+            logger.info(f"{activity_hash} was not successfully inserted")
 
 
 
