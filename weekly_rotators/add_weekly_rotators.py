@@ -1,10 +1,9 @@
 import json
-from sql_functions import table_exists,build_weekly_rotator_table,fetch_one,fetch_all,execute_query
+from sql_functions import build_weekly_rotator_table,fetch_one,fetch_all,execute_query
 from helper_functions import convert_hash_to_id
 from mappings import damage_type_mapping, weekly_rotators_mapping
-from main import logger
 
-def add_weekly_rotators(weekly_rotator_hash_list, config):
+def add_weekly_rotators(weekly_rotator_hash_list, config, logger):
     """Adds weekly rotators to the database"""
     # Check if Weekly Rotators Table Exist and build it if it does not
     build_weekly_rotator_table(config)

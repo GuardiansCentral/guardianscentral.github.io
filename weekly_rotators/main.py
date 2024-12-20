@@ -25,7 +25,7 @@ logger.setLevel(logging.DEBUG)
 
 # weekly_rotators_hash_list =['2122313384']
 # add_weekly_rotators(weekly_rotator_hash_list=weekly_rotators_hash_list, config=config)
-update_active_weekly_rotators(config=config)
+update_active_weekly_rotators(config=config, logger=logger)
 # update_weekly_rotators_data
 """
 This will essentially update the data in WeeklyDataTable by looking at the ActiveWeeklyRotatorsTable and grabbing the list in there. It will then use this list to 

@@ -1,9 +1,7 @@
 from sql_functions import build_active_weekly_rotator_table, does_item_exists_in_column, execute_query, get_max_sequence_by_rotator_type
 from weekly_rotators.sql_functions import fetch_one
-from main import logger
 
-
-def update_active_weekly_rotators(config):
+def update_active_weekly_rotators(config,logger):
     """Adds active weekly rotators to the database"""
     # Check if active weekly Rotators Table Exist and build it if it does not
     build_active_weekly_rotator_table(config)
@@ -64,8 +62,10 @@ def update_active_weekly_rotators(config):
                 new_activity_sequence = sequence + 2
         elif rotator_type == 'Exotic Mission':
             if sequence >= max_sequence:
+                exotic_one_found = True
                 new_activity_sequence = 1
             else:
+                exotic_one_found = True
                 new_activity_sequence = sequence + 1
 
         new_activity_row = fetch_one(query=f"SELECT Hash, RotatorType, Sequence, Name FROM RotatorSchedule WHERE Sequence = '{new_activity_sequence}' AND RotatorType = '{rotator_type}'",config=config,params=None)
@@ -76,7 +76,8 @@ def update_active_weekly_rotators(config):
 
     if raid_one_found == True and raid_two_found == True and dungeon_one_found == True and dungeon_two_found == True and exotic_one_found == True:
         try:
-            execute_query(query=f"UPDATE ActiveWeeklyRotatorsTable SET RotatorList = {new_active_weekly_rotators_list}", config=config, params=None)
+            execute_query(query=f"UPDATE ActiveWeeklyRotatorsTable WHERE NAME = ActiveWeeklyRotators SET RotatorList = {new_active_weekly_rotators_list}", config=config, params=None)
+            logger.info("Successfully updated active weekly rotators list")
         except Exception as e:
             logger.error("Failed to update active weekly rotators list")
             logger.error(e)
