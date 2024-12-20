@@ -1,5 +1,6 @@
-from sql_functions import table_exists,build_active_weekly_rotator_table, does_item_exists_in_column, execute_query
+from sql_functions import build_active_weekly_rotator_table, does_item_exists_in_column, execute_query, get_max_sequence_by_rotator_type
 from weekly_rotators.sql_functions import fetch_one
+from main import logger
 
 
 def update_active_weekly_rotators(config):
@@ -11,7 +12,7 @@ def update_active_weekly_rotators(config):
         build_active_weekly_rotator_table(config)
         return
     else:
-        print("Active weekly rotators list already exists inside the database")
+        logger.info("Active weekly rotators list already exists inside the database")
 
     current_active_weekly_rotators_row = fetch_one(query=f"SELECT RotatorList FROM ActiveWeeklyRotatorsTable WHERE NAME = 'ActiveWeeklyRotators'",config=config,params=None)
     current_active_weekly_rotators_string = current_active_weekly_rotators_row[0]
@@ -20,46 +21,67 @@ def update_active_weekly_rotators(config):
     print(current_active_weekly_rotators_list)
 
     if not current_active_weekly_rotators_list:
-        print("No active weekly rotators found")
-        print("Creating new active weekly rotators list")
+        logger.info("No active weekly rotators found")
+        logger.info("Creating new active weekly rotators list")
         build_active_weekly_rotator_table(config)
         return
     else:
-        print("Active weekly rotators list exists")
+        logger.info("Active weekly rotators list exists")
 
+    raid_one_found = False
+    raid_two_found = False
+    dungeon_one_found = False
+    dungeon_two_found = False
+    exotic_one_found = False
+    new_active_weekly_rotators_list = []
     for activity in current_active_weekly_rotators_list:
         get_activity_query = f"SELECT Sequence,RotatorType,Hash, Name FROM RotatorSchedule WHERE Hash = {activity}"
         activity_row = fetch_one(query=get_activity_query,config=config,params=None)
-        print(activity_row)
+        logger.info(f"Activity row for {activity} found")
+        logger.info(activity_row)
 
         sequence = activity_row[0]
         rotator_type = activity_row[1]
+        new_activity_sequence = None
 
         max_sequence = get_max_sequence_by_rotator_type(config=config, activity_type=rotator_type)
-        print(max_sequence)
+        logger.info(max_sequence)
+        if rotator_type == 'Raid' or rotator_type == 'Dungeon':
+            if sequence >= max_sequence or sequence + 2 > max_sequence:
+                if raid_one_found == False and raid_two_found == False and rotator_type == 'Raid':
+                    raid_one_found = True
+                    new_activity_sequence = 1
+                elif raid_two_found == False and raid_one_found == True and rotator_type == 'Raid':
+                    raid_two_found = True
+                    new_activity_sequence = 2
+                elif dungeon_one_found == False and dungeon_two_found == True and rotator_type == 'Dungeon':
+                    dungeon_one_found = True
+                    new_activity_sequence = 1
+                elif dungeon_two_found == False and dungeon_one_found == True and rotator_type == 'Dungeon':
+                    dungeon_two_found = True
+                    new_activity_sequence = 2
+            else:
+                new_activity_sequence = sequence + 2
+        elif rotator_type == 'Exotic Mission':
+            if sequence >= max_sequence:
+                new_activity_sequence = 1
+            else:
+                new_activity_sequence = sequence + 1
 
+        new_activity_row = fetch_one(query=f"SELECT Hash, RotatorType, Sequence, Name FROM RotatorSchedule WHERE Sequence = '{new_activity_sequence}' AND RotatorType = '{rotator_type}'",config=config,params=None)
+        new_activity_hash = new_activity_row[0]
 
+        new_active_weekly_rotators_list.append(new_activity_hash)
+    logger.info(str(new_active_weekly_rotators_list))
 
-
-
-
-
-
-
-def get_max_sequence_by_rotator_type(config, activity_type):
-    query = (
-        f"SELECT MAX(Sequence) AS MaxSequence "
-        f"FROM RotatorSchedule "
-        f"WHERE RotatorType = ?"
-    )
-    result = fetch_one(query=query, config=config, params=(activity_type,))
-    return result[0] if result else None
-
-
-
-
-#For this update the rotatorschedule table. The sequence should match the sequence for this episode. We are just changeing the sequence numbers to match bungies schedule instead
-#of matching the release order of the activites. We will then be grabbing Raids and Dungeons in pairs and the single Story
+    if raid_one_found == True and raid_two_found == True and dungeon_one_found == True and dungeon_two_found == True and exotic_one_found == True:
+        try:
+            execute_query(query=f"UPDATE ActiveWeeklyRotatorsTable SET RotatorList = {new_active_weekly_rotators_list}", config=config, params=None)
+        except Exception as e:
+            logger.error("Failed to update active weekly rotators list")
+            logger.error(e)
+    else:
+        logger.error("We did not find one of the new active weekly rotators")
 
 
 

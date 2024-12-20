@@ -2,6 +2,7 @@ import json
 from sql_functions import table_exists,build_weekly_rotator_table,fetch_one,fetch_all,execute_query
 from helper_functions import convert_hash_to_id
 from mappings import damage_type_mapping, weekly_rotators_mapping
+from main import logger
 
 def add_weekly_rotators(weekly_rotator_hash_list, config):
     """Adds weekly rotators to the database"""
@@ -16,7 +17,7 @@ def add_weekly_rotators(weekly_rotator_hash_list, config):
 
         # Checks if activity already exist inside Weekly Rotators Table and skips iteration if it does
         if fetch_one(query=f"SELECT * FROM WeeklyRotatorsTable Where Hash = {activity_hash}", config=config) is not None:
-            print(f"Found weekly rotator {activity_hash} inside the WeeklyRotatorsTable skipping")
+            logger.info(f"Found weekly rotator {activity_hash} inside the WeeklyRotatorsTable skipping")
             continue
 
         # Gets Destiny activity definition json string and converts it to a dictionary
@@ -198,8 +199,8 @@ def add_weekly_rotators(weekly_rotator_hash_list, config):
                 weekly_rotator_dict["catalysts"] = catalysts
                 weekly_rotator_dict["weapons"] = weapons
         else:
-            print('Inventory item list is empty')
-        print(weekly_rotator_dict)
+            logger.info('Inventory item list is empty')
+        logger.info(weekly_rotator_dict)
 
         json_string = json.dumps(weekly_rotator_dict)
 

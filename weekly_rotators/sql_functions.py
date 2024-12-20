@@ -8,7 +8,12 @@ def establish_connection(config):
         f"UID={config.get('UserId')};"
         f"PWD={config.get('Password')};"
     )
-    return pyodbc.connect(connection_string)
+    try:
+        return pyodbc.connect(connection_string)
+    except pyodbc.Error as e:
+        print(e)
+        print("Error connecting to database.")
+        raise
 
 def execute_query(query, config, params=None):
     with establish_connection(config) as connection:
@@ -83,3 +88,13 @@ def does_item_exists_in_column(config, table_name, column_name, name_to_check):
     query = f"SELECT 1 FROM {table_name} WHERE {column_name} = ?"
     fetch_one(query, config, params=name_to_check)
     return fetch_one(query, config, params=name_to_check) is not None
+
+
+def get_max_sequence_by_rotator_type(config, activity_type):
+    query = (
+        f"SELECT MAX(Sequence) AS MaxSequence "
+        f"FROM RotatorSchedule "
+        f"WHERE RotatorType = ?"
+    )
+    result = fetch_one(query=query, config=config, params=(activity_type,))
+    return result[0] if result else None

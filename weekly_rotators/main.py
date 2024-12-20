@@ -1,4 +1,5 @@
 import pyodbc
+import logging
 import tomllib
 from add_weekly_rotators import add_weekly_rotators
 from update_active_weekly_rotators import update_active_weekly_rotators
@@ -8,6 +9,20 @@ from update_active_weekly_rotators import update_active_weekly_rotators
 with open("config.toml", "rb") as file:
     config = tomllib.load(file)
 print(config.get('Server'))
+
+
+# Create and configure logger
+logging.basicConfig(filename="newfile.log",
+                    format='%(asctime)s %(message)s',
+                    filemode='w')
+
+# Creating an object
+logger = logging.getLogger()
+
+# Setting the threshold of logger to DEBUG
+logger.setLevel(logging.DEBUG)
+
+
 # weekly_rotators_hash_list =['2122313384']
 # add_weekly_rotators(weekly_rotator_hash_list=weekly_rotators_hash_list, config=config)
 update_active_weekly_rotators(config=config)
