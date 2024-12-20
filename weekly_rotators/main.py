@@ -15,7 +15,7 @@ with open("config.toml", "rb") as file:
 log_filename = f"weekly_rotators_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
 
 logging.basicConfig(
-    filename=log_filename,
+    filename=f"logging/{log_filename}",
     format='%(asctime)s %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S',
     filemode='w',
