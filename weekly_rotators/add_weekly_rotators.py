@@ -212,12 +212,12 @@ def add_weekly_rotators(weekly_rotator_hash_list, config, logger):
 
         json_string = json.dumps(weekly_rotator_dict)
 
-        insert_query = "INSERT INTO WeeklyRotatorsTable (Hash, Json) VALUES (?, ?)"
+        insert_query = "INSERT INTO WeeklyRotatorsTable (Hash, JsonString) VALUES (?, ?)"
         try:
             execute_query(query=insert_query, params=(activity_hash, json_string), config=config, logger=logger)
             logger.info(f"{activity_hash} was successfully inserted")
         except Exception as e:
-            logger.info(f"{activity_name} was not successfully inserted: {e}")
+            logger.info(f"{activity_hash} was not successfully inserted: {e}")
 
 
 

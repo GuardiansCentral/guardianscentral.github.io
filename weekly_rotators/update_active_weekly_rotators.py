@@ -7,7 +7,9 @@ def update_active_weekly_rotators(config,logger):
     build_active_weekly_rotator_table(config=config, logger=logger)
 
     if not does_item_exists_in_column(config=config, table_name='ActiveWeeklyRotatorsTable', column_name="NAME", name_to_check="ActiveWeeklyRotators", logger=logger):
-        build_active_weekly_rotator_table(config=config, logger=logger)
+        logger.info('Active weekly rotators list is not populated. Setting to default values.')
+        populate_active_weekly_rotator_table_query = f"INSERT INTO ActiveWeeklyRotatorsTable (NAME, RotatorList) VALUES ('ActiveWeeklyRotators', '[2122313384,1042180643,2823159265,1262462921,2668737148]');"
+        execute_query(query=populate_active_weekly_rotator_table_query, config=config, params=None, logger=logger)
         return
     else:
         logger.info("Active weekly rotators list already exists inside the database")
@@ -19,9 +21,10 @@ def update_active_weekly_rotators(config,logger):
     logger.info(f"This is the old active weekly rotators {current_active_weekly_rotators_list}")
 
     if not current_active_weekly_rotators_list:
-        logger.info("No active weekly rotators found")
+        logger.info("No active weekly rotators found or the list is empty")
         logger.info("Creating new active weekly rotators list")
-        build_active_weekly_rotator_table(config=config, logger=logger)
+        populate_active_weekly_rotator_table_query = f"INSERT INTO ActiveWeeklyRotatorsTable (NAME, RotatorList) VALUES ('ActiveWeeklyRotators', '[2122313384,1042180643,2823159265,1262462921,2668737148]');"
+        execute_query(query=populate_active_weekly_rotator_table_query, config=config, params=None, logger=logger)
         return
     else:
         logger.info("Active weekly rotators list exists")
@@ -33,6 +36,7 @@ def update_active_weekly_rotators(config,logger):
     exotic_one_found = False
     new_active_weekly_rotators_list = []
     for activity in current_active_weekly_rotators_list:
+        logger.info(f"Checking activity {activity} inside the RotatorSchedule")
         get_activity_query = f"SELECT Sequence,RotatorType,Hash, Name FROM RotatorSchedule WHERE Hash = {activity}"
         activity_row = fetch_one(query=get_activity_query,config=config,params=None, logger=logger)
         logger.info(f"Activity row for {activity} found")

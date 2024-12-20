@@ -16,6 +16,7 @@ def establish_connection(config,logger):
         raise
 
 def execute_query(query, config, logger, params=None):
+    logger.debug(f"Executing query: {query}")
     with establish_connection(config=config,logger=logger) as connection:
         try:
             cursor = connection.cursor()
@@ -30,6 +31,7 @@ def execute_query(query, config, logger, params=None):
 
 def fetch_one(query, config, logger, params=None):
     """Fetches one result from the database"""
+    logger.debug(f"Executing query: {query} with params: {params}")
     try:
         with establish_connection(config=config,logger=logger) as connection:
             with connection.cursor() as cursor:
@@ -41,6 +43,7 @@ def fetch_one(query, config, logger, params=None):
 
 def fetch_all(query, config, logger, params=None):
     """Fetches all results from the database"""
+    logger.debug(f"Executing query: {query} with params: {params}")
     try:
         with establish_connection(config=config,logger=logger) as connection:
             with connection.cursor() as cursor:
@@ -67,7 +70,7 @@ def build_weekly_rotator_table(config,logger):
             logger.info(f"The table {table_name} exists.")
         else:
             logger.info(f"The table {table_name} does not exist. Creating it.")
-            query = "CREATE TABLE WeeklyRotatorsTable (Hash BIGINT, Json VARCHAR(MAX))"
+            query = "CREATE TABLE WeeklyRotatorsTable (Hash BIGINT, JsonString VARCHAR(MAX))"
             execute_query(query=query, config=config,logger=logger)
     except Exception as e:
         logger.error(f"Error while creating the Weekly Rotator table: {e}")
@@ -79,18 +82,32 @@ def build_active_weekly_rotator_table(config, logger):
         if table_exists(table_name=table_name, config=config, logger=logger):
             logger.info(f"The table {table_name} exists.")
         else:
-            logger.info(f"The table {table_name} does not exist. Creating it.")
+            logger.info(f"The table {table_name} does not exist. Creating it. And populating with default rotators.")
             query = "CREATE TABLE ActiveWeeklyRotatorsTable (Name VARCHAR(MAX), RotatorList VARCHAR(MAX))"
-            execute_query(query=query, config=config, params=None)
+            execute_query(query=query, config=config, params=None, logger=logger)
             populate_active_weekly_rotator_table_query = f"INSERT INTO ActiveWeeklyRotatorsTable (NAME, RotatorList) VALUES ('ActiveWeeklyRotators', '[2122313384,1042180643,2823159265,1262462921,2668737148]');"
-            execute_query(query=populate_active_weekly_rotator_table_query, config=config, params=None)
+            execute_query(query=populate_active_weekly_rotator_table_query, config=config, params=None,logger=logger)
     except Exception as e:
         logger.error(f"Error while creating the table: {e}")
+
+
+def build_weekly_data_table(config,logger):
+    """Builds the WeeklyDataTable if it doesn't exist"""
+    table_name = 'WeeklyDataTable'
+    try:
+        if table_exists(table_name=table_name, config=config, logger=logger):
+            logger.info(f"The table {table_name} exists.")
+        else:
+            logger.info(f"The table {table_name} does not exist. Creating it.")
+            query = "CREATE TABLE WeeklyDataTable (DataType VARCHAR(MAX), JsonString VARCHAR(MAX))"
+            execute_query(query=query, config=config,logger=logger)
+    except Exception as e:
+        logger.error(f"Error while creating the {table_name}: {e}")
+
 
 def does_item_exists_in_column(config, table_name, column_name, name_to_check, logger):
     try:
         query = f"SELECT 1 FROM {table_name} WHERE {column_name} = ?"
-        fetch_one(query, config, params=name_to_check,logger=logger)
         return fetch_one(query, config, params=name_to_check,logger=logger) is not None
     except Exception as e:
         logger.error(f"An error occurred while checking if {name_to_check} exist in {column_name} and {table_name}: {e}")
