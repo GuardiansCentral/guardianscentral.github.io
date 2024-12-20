@@ -1,5 +1,5 @@
 from sql_functions import build_active_weekly_rotator_table, does_item_exists_in_column, execute_query, get_max_sequence_by_rotator_type
-from weekly_rotators.sql_functions import fetch_one
+from backend.weekly_rotators.sql_functions import fetch_one
 
 def update_active_weekly_rotators(config,logger):
     """Adds active weekly rotators to the database"""

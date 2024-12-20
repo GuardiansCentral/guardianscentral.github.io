@@ -76,8 +76,8 @@ const WeeklyRotators = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('https://guardianscentral.gg/weeklyrotators');
-                //const response = await axios.get('http://localhost:8000/weeklyrotators');
+                //const response = await axios.get('https://guardianscentral.gg/weeklyrotators');
+                const response = await axios.get('http://localhost:8000/weeklyrotators');
                 const data = response.data.getWeeklyRotators;
                 //console.log(data);
                 // Parse the JSON data and set the Dicts

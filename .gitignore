@@ -68,4 +68,4 @@ yarn-error.log*
 /WeeklyRotators/logging
 .env
 
-/weekly_rotators/config.toml
+/backend/weekly_rotators/config.toml
