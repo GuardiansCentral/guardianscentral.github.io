@@ -1,4 +1,3 @@
-import pyodbc
 import logging
 import tomllib
 from add_weekly_rotators import add_weekly_rotators
